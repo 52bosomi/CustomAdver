@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ad.ADtest.dao.AdDao">
+
+
+    <insert id="sendTeleTwo" parameterType="com.ad.ADtest.dto.Basic">
+
+        INSERT INTO Basic(
+            api_num,test_tid ,user_id ,os_type , os_version,device_name ,adid , tc_no, start_time, app_version,server_target
+        ) VALUES (
+        #{api_num} , #{test_tid},#{user_id} , #{os_type} ,#{os_version},#{device_name} ,#{adid} , #{tc_no} , #{start_time} , #{app_version}, #{server_target}
+        )
+
+    </insert>
+
+
+    <insert id="sendTeleThree" parameterType="com.ad.ADtest.dto.Mobile_Res">
+
+        INSERT INTO Mobile_Res (
+                     api_num,test_tid ,user_id ,request_data , response_data,log ,ext_1
+        ) VALUES (
+                     #{api_num} , #{test_tid},#{user_id} , #{request_data} ,#{response_data},#{log} ,#{ext_1}
+        )
+
+    </insert>
+
+    <insert id="imageInfo" parameterType="com.ad.ADtest.dto.ImageInfo">
+
+        INSERT INTO ImageInfo (
+        original_name,insert_time ,image_path ,test_tid , user_id,ext_1
+        ) VALUES (
+        #{original_name} , #{insert_time},#{image_path} , #{test_tid} ,#{user_id},#{ext_1}
+        )
+
+    </insert>
+
+    <select id="bringInfo" parameterType="com.ad.ADtest.dto.Basic" resultType="com.ad.ADtest.dto.Res_Req">
+        SELECT * FROM Basic WHERE test_tid = #{test_tid} AND user_id = #{user_id};
+    </select>
+
+    <select id="bringInfo2" parameterType="com.ad.ADtest.dto.Basic" resultType="com.ad.ADtest.dto.Res_Req">
+        SELECT * FROM Mobile_Res WHERE test_tid = #{test_tid} AND user_id = #{user_id};
+    </select>
+
+    <select id="bringUrl" parameterType="com.ad.ADtest.dto.Basic" resultType="com.ad.ADtest.dto.Res_Req">
+        SELECT * FROM ImageInfo WHERE test_tid = #{test_tid} AND user_id = #{user_id};
+    </select>
+
+
+    <select id="deduplicate" parameterType="String" resultType="com.ad.ADtest.dto.Basic">
+        SELECT * FROM Basic WHERE test_tid =#{test_tid};
+    </select>
+
+
+
+
+</mapper>
